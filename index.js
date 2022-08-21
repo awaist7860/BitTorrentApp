@@ -1,14 +1,22 @@
 'use strict';
+
+
+//Link to website
+//https://allenkim67.github.io/programming/2016/05/04/how-to-make-your-own-bittorrent-client.html
+
 const fs = require('fs');
 const bencode = require('bencode');
 const tracker = require('./tracker');
+const torrentParser = require('./torrent-parser');
 
 //1
 //const dgram = require('dgram');
 //const Buffer = require('buffer').Buffer;
 //const urlParse = require('url').parse;
 
-const torrent = bencode.decode(fs.readFileSync('puppy.torrent'));
+//const torrent = bencode.decode(fs.readFileSync('puppy.torrent'));
+
+const torrent = torrentParser.open('puppy.torrent');
 
 tracker.getPeers(torrent, peers => {
     console.log('list of peers: ', peers);
